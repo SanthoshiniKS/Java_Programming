@@ -1,5 +1,5 @@
 import java.util.*;
-class getinput {
+class Average{
     public static void main(String[] args) {
         Scanner obj=new Scanner(System.in);
         System.out.println("Enter two floating numbers: ");
