@@ -7,39 +7,39 @@ public class Clubbed{
         String arr[]=new String[n];
         for (int i=0;i<n;i++)
             arr[i]=obj.next();
-        Clubbed ob=new Clubbed();
-        ob.clubbedwords(arr);
+        List<String> clubbedWords=findClubbedWords(arr,n);
+        System.out.println(clubbedWords); 
     }
 
-    public void clubbedwords(String[] words){
-        HashMap<String, Boolean> memo = new HashMap<>();
-        Set<String> set = new HashSet<>();
-        List<String> ans = new ArrayList<>();
-        for (String word : words)
-            set.add(word);
-        for (String word:words) {
-            set.remove(word);
-            if (recur(word, 0,memo,set)) ans.add(word);
-            set.add(word);
+    public static List<String> findClubbedWords(String[] words,int n) {
+        List<String> clubbedWords=new ArrayList<>();
+        HashSet<String> set=new HashSet<>();
+        for(int i=0;i<n;i++)
+           set.add(words[i]);
+        for(String word:words) {
+            if(isClubbed(word,set))
+                clubbedWords.add(word);
         }
-        System.out.println(ans);
+        return clubbedWords;
     }
 
-    private boolean recur(String s, int k,HashMap<String,Boolean> memo,Set<String> set) {
-        String key = s + k;
-        if (memo.containsKey(key)) return memo.get(key);
-        if (k == s.length()) {
-            memo.put(key, true);
-            return true;
-        }
-        for (int i = k; i < s.length(); i++) {
-            String sub = s.substring(k, i + 1);
-            if (set.contains(sub) && recur(s, i+1,memo,set)) {
-                memo.put(key, true);
+    public static boolean isClubbed(String word,HashSet<String> set) {
+        for(int i=1;i<word.length();i++) {
+            String pre=word.substring(0, i);
+            String suf=word.substring(i);
+            if(set.contains(pre) && set.contains(suf)) 
                 return true;
-            }
+            if(isClubbed(suf,set))
+                return true;
         }
-        memo.put(key, false);
         return false;
     }
 }
+
+/*
+Enter no. of elements: 
+8
+Enter the elements: mat mates bellmates matbellmates bell butter ribbon butterribbon
+Output:
+[bellmates, matbellmates, butterribbon]
+*/
