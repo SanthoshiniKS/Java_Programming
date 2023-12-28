@@ -3,7 +3,7 @@ public class palprime {
     private int number;
     private String message;
 
-    public palprime(int number) {
+    public Prime(int number) {
         this.number=number;
         this.message=display();
         System.out.println("Number "+number+" is " +message);
