@@ -1,9 +1,4 @@
 import java.util.Scanner;
-
-/**
- *
- * @author menaga
- */
 public class palprime {
     private int number;
     private String message;
